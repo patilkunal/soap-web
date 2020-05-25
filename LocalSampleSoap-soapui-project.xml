@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="afea9d91-9f02-47a9-9e79-ad4cb945e49c" activeEnvironment="Default" name="LocalSampleSoap" resourceRoot="" soapui-version="5.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="2d8ed71e-9be5-4ae4-b5e8-6725582287d8" wsaVersion="NONE" name="BasicHttpBinding" type="wsdl" bindingName="{http://tempuri.org/}BasicHttpBinding" soapVersion="1_1" anonymous="optional" definition="https://localhost:5001/Services.asmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://localhost:5001/Services.asmx"><con:part><con:url>https://localhost:5001/Services.asmx</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://tempuri.org/" name="ISampleService" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://tempuri.org/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/System"/>
+      <xs:element name="Test">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="s" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TestResponse">
+        <xs:element minOccurs="0" maxOccurs="1" name="TestResult" type="xs:string"/>
+      </xs:element>
+      <xs:element name="XmlMethod">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="xml">
+              <xs:complexType mixed="true">
+                <xs:sequence>
+                  <xs:any/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="XmlMethodResponse"/>
+      <xs:element name="TestCustomModel">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="inputModel" type="tns:MyCustomModel"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TestCustomModelResponse">
+        <xs:element minOccurs="0" maxOccurs="1" name="TestCustomModelResult" type="tns:MyCustomModel"/>
+      </xs:element>
+      <xs:complexType name="MyCustomModel">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:int"/>
+          <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string"/>
+          <xs:element minOccurs="0" maxOccurs="1" name="Email" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ISampleService_Test_InputMessage">
+    <wsdl:part name="parameters" element="tns:Test"/>
+  </wsdl:message>
+  <wsdl:message name="ISampleService_Test_OutputMessage">
+    <wsdl:part name="parameters" element="tns:String"/>
+  </wsdl:message>
+  <wsdl:message name="ISampleService_XmlMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:XmlMethod"/>
+  </wsdl:message>
+  <wsdl:message name="ISampleService_XmlMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:XmlMethodResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ISampleService_TestCustomModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:TestCustomModel"/>
+  </wsdl:message>
+  <wsdl:message name="ISampleService_TestCustomModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MyCustomModel"/>
+  </wsdl:message>
+  <wsdl:portType name="ISampleService">
+    <wsdl:operation name="Test">
+      <wsdl:input message="tns:ISampleService_Test_InputMessage"/>
+      <wsdl:output message="tns:ISampleService_Test_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="XmlMethod">
+      <wsdl:input message="tns:ISampleService_XmlMethod_InputMessage"/>
+      <wsdl:output message="tns:ISampleService_XmlMethod_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="TestCustomModel">
+      <wsdl:input message="tns:ISampleService_TestCustomModel_InputMessage"/>
+      <wsdl:output message="tns:ISampleService_TestCustomModel_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding" type="tns:ISampleService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://tempuri.org/ISampleService/Test" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XmlMethod">
+      <soap:operation soapAction="http://tempuri.org/ISampleService/XmlMethod" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestCustomModel">
+      <soap:operation soapAction="http://tempuri.org/ISampleService/TestCustomModel" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ISampleService">
+    <wsdl:port name="BasicHttpBinding" binding="tns:BasicHttpBinding">
+      <soap:address location="https://localhost:5001/Services.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://localhost:5001/Services.asmx</con:endpoint></con:endpoints><con:operation id="cc108d17-4e69-430e-a0de-cc8a72cf278d" isOneWay="false" action="http://tempuri.org/ISampleService/Test" name="Test" bindingOperationName="Test" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7b25fc96-4810-4d90-9702-4f9770b558f3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:5001/Services.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:Test>         
+         <tem:s>Kunal Patil</tem:s>
+      </tem:Test>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/ISampleService/Test"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4045c454-f433-4dbc-9a37-3f10880c2bb0" isOneWay="false" action="http://tempuri.org/ISampleService/TestCustomModel" name="TestCustomModel" bindingOperationName="TestCustomModel" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f1d8cb15-2485-4bfe-ba09-f045bf9b56e9" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:5001/Services.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:TestCustomModel>
+         <!--Optional:-->
+         <tem:inputModel>
+            <tem:Id>1</tem:Id>
+            <!--Optional:-->
+            <tem:Name>Kunal</tem:Name>
+            <!--Optional:-->
+            <tem:Email>kunal@example.com</tem:Email>
+         </tem:inputModel>
+      </tem:TestCustomModel>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/ISampleService/TestCustomModel"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="664ce149-43c2-41a9-a75c-6281fa4cc935" isOneWay="false" action="http://tempuri.org/ISampleService/XmlMethod" name="XmlMethod" bindingOperationName="XmlMethod" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8d396b46-6b49-41c6-9a89-12c1ddae006d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://localhost:5001/Services.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:XmlMethod>
+         <!--Optional:-->
+         <tem:xml>
+            e
+            <!--You may enter ANY elements at this point-->
+            gero
+         </tem:xml>
+      </tem:XmlMethod>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/ISampleService/XmlMethod"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
